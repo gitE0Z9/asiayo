@@ -33,3 +33,8 @@
 - `target`: 目標匯率，支持 `USD`, `JPY`, `TWD`
 
 - `amount`: 金額，e.g. `$100`
+
+
+## 測試
+
+指令: `go test ./tests`
