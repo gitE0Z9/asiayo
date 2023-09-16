@@ -1,4 +1,4 @@
-package main
+package app
 
 var EXCHANGE_RATE_TABLE = map[string]map[string]float64{
 	"TWD": {

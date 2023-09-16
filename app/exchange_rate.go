@@ -1,6 +1,7 @@
-package main
+package app
 
 import (
+	"math"
 	"net/http"
 	"regexp"
 	"strconv"
@@ -47,7 +48,7 @@ func exchangeRateConversion(c *gin.Context) {
 			return
 		}
 
-		convertedAmount = exchangeRate * amount
+		convertedAmount = math.Round((exchangeRate * amount * 100)) / 100
 
 		printer := message.NewPrinter(language.English)
 		c.JSON(http.StatusOK, gin.H{
