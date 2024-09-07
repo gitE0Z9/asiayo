@@ -1,0 +1,54 @@
+definitions:
+  exchange_rate.ConversionResponse:
+    properties:
+      amount:
+        type: string
+      msg:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /exchange-rate:
+    get:
+      description: exchange rate conversion
+      parameters:
+      - description: source currency
+        enum:
+        - JPY
+        - TWD
+        - USD
+        in: query
+        name: source
+        required: true
+        type: string
+      - description: target currency
+        enum:
+        - JPY
+        - TWD
+        - USD
+        in: query
+        name: target
+        required: true
+        type: string
+      - description: amount
+        example: '"$1,111.05"'
+        in: query
+        name: amount
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/exchange_rate.ConversionResponse'
+        "400":
+          description: Bad parameter
+          schema:
+            $ref: '#/definitions/exchange_rate.ConversionResponse'
+      summary: exchange rate conversion
+      tags:
+      - exchange rate
+swagger: "2.0"
