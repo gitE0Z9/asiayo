@@ -1,12 +1,11 @@
-# asiayo
+# asiayo 匯率作業
 
 ## 啟動
 
 1. 編譯golang應用
 
     ```sh
-    cd src
-    go build . -o main
+    go build .
     ```
 
 2. 賦予執行權限後，啟動伺服器 
@@ -16,15 +15,15 @@
     ./main
     ```
 
-3. 查看API
+3. 查看 Swagger
 
     ```sh
-    curl http://localhost:8080
+    curl http://localhost:8080/docs/index.html
     ```
 
 ## 路由
 
-> `/exchange-rate`
+> `/api/v1/exchange-rate`
 
 ### 參數:
 
@@ -38,3 +37,5 @@
 ## 測試
 
 指令: `go test ./tests`
+
+或者使用 `gotestfmt`: `go test -json -v ./tests | gotestfmt`
