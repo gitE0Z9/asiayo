@@ -1,10 +1,10 @@
 package main
 
 import (
-	"asiayo/app"
+	"asiayo/application"
 )
 
 func main() {
-	server := app.SetupRoute()
-	server.Run()
+	server := application.SetupRoute()
+	application.RunServer(server, ":8080")
 }

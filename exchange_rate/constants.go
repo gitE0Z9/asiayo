@@ -1,6 +1,6 @@
-package app
+package exchange_rate
 
-var EXCHANGE_RATE_TABLE = map[string]map[string]float64{
+var RateTable = map[string]map[string]float64{
 	"TWD": {
 		"TWD": 1,
 		"JPY": 3.669,

@@ -1,7 +1,7 @@
 package tests
 
 import (
-	"asiayo/app"
+	"asiayo/application"
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
@@ -10,10 +10,12 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+const conversionPath = "/api/v1/exchange-rate"
+
 func TestSuccess(t *testing.T) {
-	router := app.SetupRoute()
+	router := application.SetupRoute()
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("GET", "/exchange-rate", nil)
+	req, _ := http.NewRequest("GET", conversionPath, nil)
 
 	q := req.URL.Query()
 	q.Add("source", "USD")
@@ -28,14 +30,14 @@ func TestSuccess(t *testing.T) {
 	}
 	expectedResponseString, _ := json.Marshal(expectedResponse)
 
-	assert.Equal(t, 200, w.Code)
+	assert.Equal(t, http.StatusOK, w.Code)
 	assert.Equal(t, string(expectedResponseString), w.Body.String())
 }
 
 func TestEmptySource(t *testing.T) {
-	router := app.SetupRoute()
+	router := application.SetupRoute()
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("GET", "/exchange-rate", nil)
+	req, _ := http.NewRequest("GET", conversionPath, nil)
 
 	q := req.URL.Query()
 	q.Add("source", "")
@@ -50,14 +52,14 @@ func TestEmptySource(t *testing.T) {
 	}
 	expectedResponseString, _ := json.Marshal(expectedResponse)
 
-	assert.Equal(t, 400, w.Code)
+	assert.Equal(t, http.StatusBadRequest, w.Code)
 	assert.Equal(t, string(expectedResponseString), w.Body.String())
 }
 
 func TestEmptyTarget(t *testing.T) {
-	router := app.SetupRoute()
+	router := application.SetupRoute()
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("GET", "/exchange-rate", nil)
+	req, _ := http.NewRequest("GET", conversionPath, nil)
 
 	q := req.URL.Query()
 	q.Add("source", "USD")
@@ -72,14 +74,14 @@ func TestEmptyTarget(t *testing.T) {
 	}
 	expectedResponseString, _ := json.Marshal(expectedResponse)
 
-	assert.Equal(t, 400, w.Code)
+	assert.Equal(t, http.StatusBadRequest, w.Code)
 	assert.Equal(t, string(expectedResponseString), w.Body.String())
 }
 
 func TestEmptyAmount(t *testing.T) {
-	router := app.SetupRoute()
+	router := application.SetupRoute()
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("GET", "/exchange-rate", nil)
+	req, _ := http.NewRequest("GET", conversionPath, nil)
 
 	q := req.URL.Query()
 	q.Add("source", "USD")
@@ -94,14 +96,14 @@ func TestEmptyAmount(t *testing.T) {
 	}
 	expectedResponseString, _ := json.Marshal(expectedResponse)
 
-	assert.Equal(t, 400, w.Code)
+	assert.Equal(t, http.StatusBadRequest, w.Code)
 	assert.Equal(t, string(expectedResponseString), w.Body.String())
 }
 
 func TestOutOfKeySource(t *testing.T) {
-	router := app.SetupRoute()
+	router := application.SetupRoute()
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("GET", "/exchange-rate", nil)
+	req, _ := http.NewRequest("GET", conversionPath, nil)
 
 	q := req.URL.Query()
 	q.Add("source", "AAA")
@@ -116,14 +118,14 @@ func TestOutOfKeySource(t *testing.T) {
 	}
 	expectedResponseString, _ := json.Marshal(expectedResponse)
 
-	assert.Equal(t, 400, w.Code)
+	assert.Equal(t, http.StatusBadRequest, w.Code)
 	assert.Equal(t, string(expectedResponseString), w.Body.String())
 }
 
 func TestOutOfKeyTarget(t *testing.T) {
-	router := app.SetupRoute()
+	router := application.SetupRoute()
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("GET", "/exchange-rate", nil)
+	req, _ := http.NewRequest("GET", conversionPath, nil)
 
 	q := req.URL.Query()
 	q.Add("source", "USD")
@@ -138,14 +140,14 @@ func TestOutOfKeyTarget(t *testing.T) {
 	}
 	expectedResponseString, _ := json.Marshal(expectedResponse)
 
-	assert.Equal(t, 400, w.Code)
+	assert.Equal(t, http.StatusBadRequest, w.Code)
 	assert.Equal(t, string(expectedResponseString), w.Body.String())
 }
 
 func TestIncorrectFormatAmount(t *testing.T) {
-	router := app.SetupRoute()
+	router := application.SetupRoute()
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("GET", "/exchange-rate", nil)
+	req, _ := http.NewRequest("GET", conversionPath, nil)
 
 	q := req.URL.Query()
 	q.Add("source", "USD")
@@ -160,6 +162,6 @@ func TestIncorrectFormatAmount(t *testing.T) {
 	}
 	expectedResponseString, _ := json.Marshal(expectedResponse)
 
-	assert.Equal(t, 500, w.Code)
+	assert.Equal(t, http.StatusBadRequest, w.Code)
 	assert.Equal(t, string(expectedResponseString), w.Body.String())
 }
