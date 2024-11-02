@@ -15,8 +15,8 @@ func SetupRoute() *gin.Engine {
 	docs.SwaggerInfo.Title = "AsiaYo exchange rate API"
 	docs.SwaggerInfo.Description = ""
 	docs.SwaggerInfo.Version = "1.0"
-	docs.SwaggerInfo.Host = "localhost:8080"
-	docs.SwaggerInfo.BasePath = "/api/v1"
+	// docs.SwaggerInfo.Host = "localhost:8080"
+	docs.SwaggerInfo.BasePath = "/api"
 	router.GET("/docs/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	v1 := router.Group("/api/v1")
