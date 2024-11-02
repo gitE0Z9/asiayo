@@ -15,7 +15,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/exchange-rate": {
+        "/v1/exchange-rate/{source}/conversion/{target}": {
             "get": {
                 "description": "exchange rate conversion",
                 "produces": [
@@ -35,7 +35,7 @@ const docTemplate = `{
                         "type": "string",
                         "description": "source currency",
                         "name": "source",
-                        "in": "query",
+                        "in": "path",
                         "required": true
                     },
                     {
@@ -47,7 +47,7 @@ const docTemplate = `{
                         "type": "string",
                         "description": "target currency",
                         "name": "target",
-                        "in": "query",
+                        "in": "path",
                         "required": true
                     },
                     {
@@ -67,7 +67,7 @@ const docTemplate = `{
                         }
                     },
                     "400": {
-                        "description": "Bad parameter",
+                        "description": "Bad parameter\" example({message=\"bad parameter\",amount=\"0\"})",
                         "schema": {
                             "$ref": "#/definitions/exchange_rate.ConversionResponse"
                         }

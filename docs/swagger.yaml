@@ -9,7 +9,7 @@ definitions:
 info:
   contact: {}
 paths:
-  /exchange-rate:
+  /v1/exchange-rate/{source}/conversion/{target}:
     get:
       description: exchange rate conversion
       parameters:
@@ -18,7 +18,7 @@ paths:
         - JPY
         - TWD
         - USD
-        in: query
+        in: path
         name: source
         required: true
         type: string
@@ -27,7 +27,7 @@ paths:
         - JPY
         - TWD
         - USD
-        in: query
+        in: path
         name: target
         required: true
         type: string
@@ -45,7 +45,7 @@ paths:
           schema:
             $ref: '#/definitions/exchange_rate.ConversionResponse'
         "400":
-          description: Bad parameter
+          description: Bad parameter" example({message="bad parameter",amount="0"})
           schema:
             $ref: '#/definitions/exchange_rate.ConversionResponse'
       summary: exchange rate conversion
