@@ -1,6 +1,6 @@
 package exchange_rate
 
-func NewErrorResponse(msg string) ConversionResponse {
+func NewConversionErrorResponse(msg string) ConversionResponse {
 	return ConversionResponse{
 		Msg:    msg,
 		Amount: "0",
@@ -8,6 +8,6 @@ func NewErrorResponse(msg string) ConversionResponse {
 }
 
 type ConversionResponse struct {
-	Msg    string
-	Amount string
+	Msg    string `json:"msg"`
+	Amount string `json:"amount"`
 }
