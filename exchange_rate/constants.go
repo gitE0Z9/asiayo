@@ -1,19 +1,19 @@
 package exchange_rate
 
-var RateTable = map[string]map[string]float64{
-	"TWD": {
-		"TWD": 1,
-		"JPY": 3.669,
-		"USD": 0.03281,
+var RateTable = map[ExchangeRate]map[ExchangeRate]float64{
+	ExchangeRates.TWD: {
+		ExchangeRates.TWD: 1,
+		ExchangeRates.JPY: 3.669,
+		ExchangeRates.USD: 0.03281,
 	},
-	"JPY": {
-		"TWD": 0.26956,
-		"JPY": 1,
-		"USD": 0.00885,
+	ExchangeRates.JPY: {
+		ExchangeRates.TWD: 0.26956,
+		ExchangeRates.JPY: 1,
+		ExchangeRates.USD: 0.00885,
 	},
-	"USD": {
-		"TWD": 30.444,
-		"JPY": 111.801,
-		"USD": 1,
+	ExchangeRates.USD: {
+		ExchangeRates.TWD: 30.444,
+		ExchangeRates.JPY: 111.801,
+		ExchangeRates.USD: 1,
 	},
 }
